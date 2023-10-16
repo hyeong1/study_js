@@ -25,7 +25,7 @@
         <!--로그인 폼-->
         <form action="success.html" id="login-form">
           <div class="my-3">
-            <input type="text" class="form-control" id="input-id" />
+            <input type="text" class="form-control" id="email" />
           </div>
           <div class="my-3">
             <input type="password" class="form-control" id="input-pw" />
@@ -62,26 +62,7 @@
       <button id="login" class="btn btn-danger">로그인</button>
     </div>
 
-    <p>태조 이성계가 태어난 년도는?</p>
-    <input type="text" id="answer" />
-    <button id="send-answer">제출</button>
-
-    <script>
-      var check = 0;
-      $("#send-answer").on("click", () => {
-        check++;
-        var userAnswer = $("#answer").val();
-        if (userAnswer == "1335") {
-          alert("성공");
-          check = 0;
-        }
-
-        if (check >= 3 && userAnswer != "1335") {
-          alert("몽총이");
-          check = 0;
-        }
-      });
-    </script>
+    <div class="alert alert-danger">5초 이내 구매시 사은품 증정</div>
 
     <script>
       $("#nav-btn").on("click", () => {
@@ -99,8 +80,8 @@
       $("#login-form").on("submit", (event) => {
         // input에 입력한 값이 공백이면 알림창 띄우기
         if (
-          $("#input-id").val() == "" ||
-          ($("#input-id").val() == "" && $("#input-pw").val() == "")
+          $("#email").val() == "" ||
+          ($("#email").val() == "" && $("#input-pw").val() == "")
         ) {
           event.preventDefault();
           alert("아이디를 입력하세요.");
@@ -111,6 +92,17 @@
           // 입력한 비번이 6자 미만이면 알림띄우기
           event.preventDefault();
           alert("비밀번호는 6자 이상 입력하세요.");
+        }
+
+        // 이메일 형식 확인
+        if (!/\s+@\s+\.\s+/.test($("#email").val())) {
+          event.preventDefault();
+          alert("이메일 형식 아님");
+        }
+        // 비밀번호에 대문자가 들어가는지 확인
+        if (!/[A-Z]/.test($("#email").val())) {
+          event.preventDefault();
+          alert("비밀번호에 영어 대문자가 들어가야 합니다.");
         }
       });
 
@@ -131,6 +123,16 @@
           $("#dark-btn").html("Dark 🔄");
         }
       });
+
+      // 타이머
+      setTimeout(() => {
+        $(".alert").hide();
+      }, 5000);
+
+      var count = 4;
+      setInterval(() => {
+        $(".alert").html(`${count--}초 이내 구매시 사은품 증정`);
+      }, 1000); // 1초마다 function 실행
     </script>
   </body>
 </html>
