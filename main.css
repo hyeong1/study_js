@@ -15,7 +15,7 @@
 
 .show {
   visibility: visible;
-  height: 210px;
+  height: 210px; /* navbar 아래로 스르륵 내려오게 함 */
 }
 
 /* 모달창 디자인 */
