@@ -42,6 +42,7 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark" id="dark-btn">Dark 🔄</span>
         <buton class="navbar-toggler" id="nav-btn" type="button">
           <span class="navbar-toggler-icon"></span>
         </buton>
@@ -60,6 +61,27 @@
       <h4>Shirts on Sale</h4>
       <button id="login" class="btn btn-danger">로그인</button>
     </div>
+
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
+
+    <script>
+      var check = 0;
+      $("#send-answer").on("click", () => {
+        check++;
+        var userAnswer = $("#answer").val();
+        if (userAnswer == "1335") {
+          alert("성공");
+          check = 0;
+        }
+
+        if (check >= 3 && userAnswer != "1335") {
+          alert("몽총이");
+          check = 0;
+        }
+      });
+    </script>
 
     <script>
       $("#nav-btn").on("click", () => {
@@ -95,6 +117,19 @@
       // input value가 변할 때, 마다 실행될 이벤트 --input(바로 작동), change(값 바꾸고 커서를 다른 데 찍어야 작동)
       $("#input-id").on("input", () => {
         console.log($("#input-id").val());
+      });
+
+      // 다크모드 버튼
+      // 버튼 클릭 횟수가 홀수면 내부 글자 Light
+      // 버튼 클릭 횟수가 짝수면 내부 글자 Dark
+      let counter = 0;
+      $("#dark-btn").on("click", () => {
+        counter++;
+        if (counter % 2 != 0) {
+          $("#dark-btn").html("Light 🔄");
+        } else {
+          $("#dark-btn").html("Dark 🔄");
+        }
       });
     </script>
   </body>
