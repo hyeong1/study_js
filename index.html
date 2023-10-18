@@ -64,6 +64,27 @@
 
     <div class="alert alert-danger">5초 이내 구매시 사은품 증정</div>
 
+    <!--이미지 슬라이드-->
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" />
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="slide-next">다음</button>
+    <button class="slide-pre">이전</button>
+
     <script>
       $("#nav-btn").on("click", () => {
         $(".list-group").toggleClass("show");
@@ -133,6 +154,30 @@
       setInterval(() => {
         $(".alert").html(`${count--}초 이내 구매시 사은품 증정`);
       }, 1000); // 1초마다 function 실행
+
+      // 이미지 슬라이드
+      let imgN = 0;
+      $(".slide-1").on("click", () => {
+        $(".slide-container").css("transform", "translateX(0vw)");
+      });
+      $(".slide-2").on("click", () => {
+        $(".slide-container").css("transform", "translateX(-100vw)");
+      });
+      $(".slide-3").on("click", () => {
+        $(".slide-container").css("transform", "translateX(-200vw)");
+      });
+      $(".slide-next").on("click", () => {
+        if (imgN < 2) {
+          imgN++;
+          $(".slide-container").css("transform", `translateX(-${imgN}00vw)`);
+        }
+      });
+      $(".slide-pre").on("click", () => {
+        if (imgN > 0) {
+          imgN--;
+          $(".slide-container").css("transform", `translateX(-${imgN}00vw)`);
+        }
+      });
     </script>
   </body>
 </html>
