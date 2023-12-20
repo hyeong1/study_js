@@ -41,11 +41,17 @@
 
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">JSShop</span>
         <span class="badge bg-dark" id="dark-btn">Dark 🔄</span>
         <buton class="navbar-toggler" id="nav-btn" type="button">
           <span class="navbar-toggler-icon"></span>
         </buton>
+      </div>
+      <div style="width: 100%; height: 20px; background-color: black">
+        <div
+          id="scroll-state"
+          style="width: 0px; height: 20px; background-color: white"
+        ></div>
       </div>
     </nav>
 
@@ -84,6 +90,20 @@
     <button class="slide-3">3</button>
     <button class="slide-next">다음</button>
     <button class="slide-pre">이전</button>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.
+    </div>
+
+    <div style="height: 1000px"></div>
 
     <script>
       $("#nav-btn").on("click", () => {
@@ -181,6 +201,46 @@
           $(".slide-container").css("transform", `translateX(-${imgN}00vw)`);
         }
       });
+
+      // 스크롤 이벤트
+      $(window).on("scroll", function () {
+        const changeCondition = 100;
+        if ($(window).scrollTop() > changeCondition) {
+          $(".navbar-brand").css("font-size", "20px");
+        }
+        if ($(window).scrollTop() < changeCondition) {
+          $(".navbar-brand").css("font-size", "30px");
+        }
+
+        // 현재 스크롤 / 전체 스크롤 == 1?
+        const scrollHeight = window.innerHeight;
+        let scrollVar = ($(window).scrollTop() / scrollHeight) * 100;
+        if (scrollVar > 1) {
+          changeScrollState(1);
+        }
+        if (scrollVar > 30) {
+          changeScrollState(50);
+        }
+        if (scrollVar > 75) {
+          changeScrollState(100);
+        }
+      });
+
+      let currentDirection = true;
+      $(".lorem").on("scroll", function () {
+        let scrollVar = document.querySelector(".lorem").scrollTop;
+        const scrollHeight = document.querySelector(".lorem").scrollHeight;
+        const divHeight = document.querySelector(".lorem").clientHeight;
+
+        if (currentDirection && scrollVar + divHeight > scrollHeight - 10) {
+          alert("확인");
+          currentDirection = false;
+        }
+      });
+
+      function changeScrollState(scrollVar) {
+        $("#scroll-state").css("width", `${scrollVar}%`);
+      }
     </script>
   </body>
 </html>
