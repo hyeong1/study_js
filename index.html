@@ -158,12 +158,15 @@
       // 이미지 슬라이드
       let imgN = 0;
       $(".slide-1").on("click", () => {
+        imgN = 0;
         $(".slide-container").css("transform", "translateX(0vw)");
       });
       $(".slide-2").on("click", () => {
+        imgN = 1;
         $(".slide-container").css("transform", "translateX(-100vw)");
       });
       $(".slide-3").on("click", () => {
+        imgN = 2;
         $(".slide-container").css("transform", "translateX(-200vw)");
       });
       $(".slide-next").on("click", () => {
