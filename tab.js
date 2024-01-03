@@ -1,12 +1,15 @@
 const tapButton = $(".tab-button");
 const tapContent = $(".tab-content");
-let tapCount = $(".tab-button").length; // html에 있는 탭 버튼의 개수
 
-for (let i = 0; i < tapCount; i++) {
-  tapButton.eq(i).on("click", function () {
-    tapButton.removeClass("orange");
-    tapButton.eq(i).addClass("orange");
-    tapContent.removeClass("show");
-    tapContent.eq(i).addClass("show");
-  });
+$(".list").click(function (e) {
+  console.log(e.target.dataset.id);
+  const tabNum = e.target.dataset.id;
+  openTap(tabNum);
+});
+
+function openTap(i) {
+  tapButton.removeClass("orange");
+  tapButton.eq(i).addClass("orange");
+  tapContent.removeClass("show");
+  tapContent.eq(i).addClass("show");
 }
