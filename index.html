@@ -241,6 +241,15 @@
       function changeScrollState(scrollVar) {
         $("#scroll-state").css("width", `${scrollVar}%`);
       }
+
+      // 모달창 검은 배경 누르면 모달창 닫기
+      document
+        .querySelector(".black-bg")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            document.querySelector(".black-bg").classList.remove("show-modal");
+          }
+        });
     </script>
   </body>
 </html>
